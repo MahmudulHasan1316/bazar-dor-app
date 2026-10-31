@@ -306,12 +306,12 @@ export default function Navbar() {
             </div>
           ) : (
             <div className="flex items-center gap-4">
-              <Link href="/signin">
+              <Link href="/Signin">
                 <button className="btn btn-ghost btn-sm text-slate-700 hover:text-teal-700 font-bold rounded-xl px-4 py-6 text-[18px]">
                   সাইন ইন
                 </button>
               </Link>
-              <Link href="/signup">
+              <Link href="/Signup">
                 <button className="btn btn-sm bg-[#05893E] hover:bg-[#05893E] border-0 text-white font-bold px-4 py-6 rounded-xl shadow-xs text-[18px]">
                   সাইন আপ
                 </button>
