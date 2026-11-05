@@ -19,7 +19,6 @@ const SignUpPage = () => {
     });
     if (data) {
       router.push("/");
-      router.refresh();
     }
   };
   return (

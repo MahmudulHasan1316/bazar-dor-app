@@ -1,6 +1,26 @@
+"use client";
+import { authClient } from "@/lib/auth-client";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const SignInPage = () => {
+  const router = useRouter();
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+
+    const { data, error } = await authClient.signIn.email({
+      email,
+      password,
+      callbackURL: "http://localhost:3000/", // An optional URL to redirect to after the user signs up.
+    });
+    console.log(data);
+    if (data) {
+      router.push("/");
+    }
+  };
   return (
     <div className="min-h-[calc(100vh-160px)] flex flex-col items-center justify-center py-12 px-4 bg-linear-to-b from-teal-50/40 via-slate-50/50 to-indigo-50/40">
       <div className="card w-full max-w-md">
@@ -16,7 +36,7 @@ const SignInPage = () => {
 
         {/* Login Form */}
         <div className="backdrop-blur-xl shadow-xl shadow-indigo-500/5 border border-slate-200/90 p-8 rounded-3xl relative overflow-hidden bg-green-100">
-          <form className="space-y-4">
+          <form onSubmit={handleSubmit} className=" space-y-4">
             <div className="space-y-1.5">
               <label className="block font-bold text-xs text-slate-700">
                 ইমেইল
@@ -122,7 +142,7 @@ const SignInPage = () => {
           <p className="text-center text-xs text-slate-500 mt-6 pt-4 border-t border-slate-100">
             নতুন সদস্য?{" "}
             <Link
-              href="/signup"
+              href="/Signup"
               className="text-teal-600 hover:text-teal-700 font-bold underline ml-1"
             >
               এখানে সাইন আপ করুন

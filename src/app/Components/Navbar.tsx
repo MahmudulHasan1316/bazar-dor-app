@@ -172,6 +172,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { TCategory } from "@/Types/category";
+import { authClient } from "@/lib/auth-client";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -179,11 +180,14 @@ export default function Navbar() {
   const pathname = usePathname();
 
   const router = useRouter();
-  // const { data: session } = authClient.useSession();
+
+  const {data : session} = authClient.useSession();
+  console.log(session);
   //   const [formattedDate, setFormattedDate] = useState("")
 
-  //   const user = session?.user;
-  const user = false;
+ 
+  const user = session?.user;
+  console.log(user);
 
 
   useEffect(() => {
@@ -204,11 +208,16 @@ export default function Navbar() {
     year: "numeric",
   });
 
-  const handleSignOut = async () => {
-    // await authClient.signOut();
-    setDropdownOpen(false);
-    router.push("/");
-  };
+  // const handleSignOut = async () => {
+  //   // await authClient.signOut();
+  //   setDropdownOpen(false);
+  //   router.push("/");
+  // };
+const handleSignOut = async () =>{
+  await authClient.signOut();
+  setDropdownOpen(false);
+  router.push("/");
+}
 
   return (
     <header className="border-b border-slate-200/80 bg-white/95 backdrop-blur-md sticky top-0 z-50 shadow-xs">
@@ -254,8 +263,8 @@ export default function Navbar() {
                       className="brightness-0 invert w-10 h-10 rounded-full object-cover"
                       src={user?.image ?? "/profile-image.png"}
                       alt="User-Profile-Image"
-                      width={40}
-                      height={40}
+                      width={32}
+                      height={32}
                     />
                   </div>
                 </div>
