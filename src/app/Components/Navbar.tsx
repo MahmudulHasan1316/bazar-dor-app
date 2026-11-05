@@ -187,7 +187,7 @@ export default function Navbar() {
 
 
   useEffect(() => {
-    fetch("https://openapi.programming-hero.com/api/bazardor/categories")
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/categories`)
       .then((res) => res.json())
       .then((data) => {
         setCategories(data);
