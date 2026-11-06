@@ -21,6 +21,14 @@ const SignUpPage = () => {
       router.push("/");
     }
   };
+
+  const handleGoogleSignUp = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    })
+  }
+  
   return (
     <div className="min-h-[calc(100vh-160px)] flex flex-col items-center justify-center py-12 px-4 bg-linear-to-b from-teal-50/40 via-slate-50/50 to-indigo-50/40">
       <div className="card w-full max-w-md">
@@ -30,7 +38,7 @@ const SignUpPage = () => {
             অ্যাকাউন্ট তৈরি করুন
           </h1>
           <p className="text-xs text-slate-500 mt-2">
-            বিনা খরচে সাইন আপ করে সব বিস্তারিত দাম দেখুন
+            বিনা খরচে সাইন আপ করে বিস্তারিত দাম দেখুন
           </p>
         </div>
 
@@ -122,7 +130,7 @@ const SignUpPage = () => {
           {/* Social Buttons */}
           <div className="grid grid-cols-2 gap-3">
             <button
-              // onClick={}
+              onClick={handleGoogleSignUp}
               type="submit"
               className="btn btn-outline border-slate-200 hover:bg-slate-50 bg-white text-slate-700 font-bold rounded-xl flex items-center justify-center gap-2 text-[16px]"
             >

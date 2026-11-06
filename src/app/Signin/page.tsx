@@ -16,11 +16,20 @@ const SignInPage = () => {
       password,
       callbackURL: "http://localhost:3000/", // An optional URL to redirect to after the user signs up.
     });
-    console.log(data);
+  
     if (data) {
       router.push("/");
     }
   };
+
+
+  const handleGoogleSignIn = async () => {
+    await authClient.signIn.social({
+      provider: "google",
+      callbackURL: "/",
+    });
+  }
+
   return (
     <div className="min-h-[calc(100vh-160px)] flex flex-col items-center justify-center py-12 px-4 bg-linear-to-b from-teal-50/40 via-slate-50/50 to-indigo-50/40">
       <div className="card w-full max-w-md">
@@ -90,7 +99,7 @@ const SignInPage = () => {
           <div className="grid grid-cols-2 gap-3">
             <button
               type="button"
-              // onClick={handleGoogleSignIn}
+              onClick={handleGoogleSignIn}
               className="btn btn-outline border-slate-200 hover:bg-slate-50 bg-white text-slate-700 font-bold rounded-xl flex items-center justify-center gap-2 text-xs"
             >
               <span className="text-base">
